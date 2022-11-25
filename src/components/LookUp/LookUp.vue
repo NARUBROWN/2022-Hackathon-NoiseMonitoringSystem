@@ -3,42 +3,27 @@
     <div class="wrapBox">
       <h3>동</h3>
       <div class="buildingBox">
-        <ul>
-          <li>101동</li>
-          <li>102동</li>
-          <li>103동</li>
-          <li>104동</li>
+        <ul v-for="building in building_list" v-bind:key="building">
+          <li @click="building_action(building.building)">{{ building.building }}동</li>
         </ul>
       </div>
     </div>
 
-    <div class="wrapBox">
+    <div class="wrapBox" v-if="unit_list_section">
       <h3>호</h3>
       <div class="numberBox">
-        <ul>
-          <li>101호</li>
-          <li>102호</li>
-          <li>201호</li>
-          <li>202호</li>
-          <li>301호</li>
-          <li>302호</li>
-          <li>401호</li>
-          <li>402호</li>
-          <li>501호</li>
-          <li>502호</li>
-          <li>601호</li>
-          <li>602호</li>
-          <li>701호</li>
-          <li>702호</li>
+        <ul v-for="unit in unit_list" v-bind:key="unit">
+          <li @click="unit_action(unit.unit)">{{ unit.unit }}호</li>
         </ul>
       </div>
     </div>
 
-    <div class="wrapBox">
+    <div class="wrapBox" v-if="unit_section">
+      {{ unit }}
       <h4>세대 조회</h4>
       <div class="selectBox">
-        <div><a>101동</a></div>
-        <div><a>101호</a></div>
+        <div><a>{{current_building}}동</a></div>
+        <div><a>{{current_unit}}호</a></div>
       </div>
 
       <div class="summaryBox">
@@ -94,10 +79,80 @@
     </div>
   </div>
   </template>
-  
+
   <script>
+  import axios from "axios";
+
   export default {
-    name: 'HelloWorld'
+    name: 'LookUp',
+    data() {
+      return {
+        building_list: {
+          building: null,
+        },
+        unit_list: {
+          unit: null
+        },
+        unit: {
+          id: null,
+          detection_result: null,
+          accuracy: null,
+          decibel: null,
+          building: null,
+          unit: null,
+          date: null,
+          time: null
+        },
+        unit_list_section: false,
+        unit_section: false,
+        current_building: null,
+        current_unit: null,
+      };
+    },
+    created() {
+      this.req_building_list();
+    },
+    methods: {
+      // 동 리스트 호출
+      async req_building_list() {
+        try {
+          let building = await axios.get('http://localhost:3000/ai/get_building_list');
+          this.building_list = building.data;
+        } catch {
+          console.log("실패");
+        }
+      },
+      // 호 리스트 호출
+      async req_unit_list(building_num) {
+        try {
+          let unit_list = await axios.get(`http://localhost:3000/ai/get_unit_list/${building_num}`);
+          this.unit_list = unit_list.data;
+        } catch {
+          console.log("실패");
+        }
+      },
+      // 호 정보 호출
+      async req_unit(unit_num) {
+        try {
+          let unit = await axios.get(`http://localhost:3000/ai/get_unit/${unit_num}`);
+          console.log(unit.data[0]);
+          this.unit = unit.data;
+        } catch {
+          console.log("실패");
+        }
+      },
+      // 동 리스트 누르면 나오는 액션
+      building_action(building_num) {
+        this.req_unit_list(building_num);
+        this.unit_list_section = true;
+        this.current_building = building_num;
+      },
+      unit_action(unit_num) {
+        this.req_unit(unit_num);
+        this.unit_section = true;
+        this.current_unit = unit_num;
+      }
+    }
   }
   </script>
   
