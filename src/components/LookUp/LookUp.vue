@@ -255,7 +255,7 @@
   }
 
   .lookUpBox ul {
-    width: 100%;
+    width: 100%; 
   }
 
   .lookUpBox ul li {
