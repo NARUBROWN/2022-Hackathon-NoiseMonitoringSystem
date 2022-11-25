@@ -101,6 +101,14 @@
     margin: 1% 0 0 5%;
     background: #FFFFFF;
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.16);
+    transition : all ease 1.5s;
+  }
+
+  .summaryBox:hover,
+  .cautionBox:hover,
+  .warningBox:hover {
+    transition : all ease 1.5s;
+    transform: scale(1.05);
   }
   
   .summaryBox dl {
@@ -148,6 +156,7 @@
     margin: 2.5% 0 0 12%;
     background: #FFFFFF;
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.16);
+    transition : all ease 1.5s;
   }
 
   .warningBox {
@@ -156,6 +165,7 @@
     margin: 2.5% 0 0 12%;
     background: #FFFFFF;
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.16);
+    transition : all ease 1.5s;
   }
 
   .cautionBox ul,

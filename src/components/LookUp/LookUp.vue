@@ -173,6 +173,7 @@
     padding: 3% 0 3% 0;
     background: #FFFFFF;
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.16);
+    transition : all ease 1.5s;
   }
 
   .numberBox {
@@ -181,6 +182,7 @@
     padding: 3% 0 3% 0;
     background: #FFFFFF;
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.16);
+    transition : all ease 1.5s;
   }
 
   .selectBox {
@@ -189,6 +191,7 @@
     margin: 2.5% 0 0 12%;
     background: #FFFFFF;
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.16);
+    transition : all ease 1.5s;
   }
 
   .selectBox div {
@@ -206,6 +209,7 @@
     margin: 2.5% 0 0 12%;
     background: #FFFFFF;
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.16);
+    transition : all ease 1.5s;
   }
 
   .summaryBox dl {
@@ -241,17 +245,11 @@
 
   .lookUpBox {
     width: 800px;
-    margin: 2.5% 0 0 12%;
-    background: #FFFFFF;
-    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.16);
-  }
-
-  .lookUpBox {
-    width: 800px;
     height: 450px;
     margin: 2.5% 0 0 12%;
     background: #FFFFFF;
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.16);
+    transition : all ease 1.5s;
   }
 
   .lookUpBox ul {
@@ -278,6 +276,15 @@
   .buildingBox ul li,
   .numberBox ul li {
     padding: 5%;
+  }
+
+  .buildingBox:hover,
+  .numberBox:hover,
+  .selectBox:hover,
+  .summaryBox:hover,
+  .lookUpBox:hover {
+    transition : all ease 1.5s;
+    transform: scale(1.05);
   }
   </style>
   
