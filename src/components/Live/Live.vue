@@ -2,24 +2,24 @@
     <h2>요약</h2>
     <div class="summaryBox">
       <dl>
-        <dt>10dB</dt>
-        <dd>현재 소음</dd>
-        <dd>지난 15초 동안</dd>
+        <dt>{{recent_db}}dB</dt>
+        <dd>최근 소음</dd>
+        <dd>가장 최근</dd>
       </dl>
       <dl>
-        <dt>10개</dt>
+        <dt>{{ caution_length }}개</dt>
         <dd>주의</dd>
-        <dd>지난 15초 동안</dd>
+        <dd>전체 기간 동안</dd>
       </dl>
       <dl>
-        <dt>3개</dt>
+        <dt>{{ warning_length }}개</dt>
         <dd>경고</dd>
-        <dd>지난 15초 동안</dd>
+        <dd>전체 기간 동안</dd>
       </dl>
       <dl>
-        <dt>40dB</dt>
+        <dt>{{avg_db}}dB</dt>
         <dd>평균 소음</dd>
-        <dd>지난 1시간 동안</dd>
+        <dd>전체 기간 동안</dd>
       </dl>
     </div>
   
@@ -37,15 +37,15 @@
             <li>time</li>
             <li>status</li>
           </ul>
-          <ul>
-            <li>무엇</li>
-            <li>정확도?</li>
-            <li>데시벨</li>
-            <li>동</li>
-            <li>유닛</li>
-            <li>2022-11-25</li>
-            <li>시간</li>
-            <li>상태</li>
+          <ul v-for="caution in caution_list" v-bind:key="caution">
+            <li>{{ caution.detection_result}}</li>
+            <li>{{ caution.accuracy }}</li>
+            <li>{{ caution.decibel }}</li>
+            <li>{{ caution.building }}동</li>
+            <li>{{ caution.unit }}호</li>
+            <li>{{ caution.date }}</li>
+            <li>{{ caution.time }}</li>
+            <li>{{ caution.state }}</li>
           </ul>
         </div>
       </div>
@@ -63,15 +63,15 @@
             <li>time</li>
             <li>status</li>
           </ul>
-          <ul>
-            <li>무엇</li>
-            <li>정확도?</li>
-            <li>데시벨</li>
-            <li>동</li>
-            <li>유닛(2/200)</li>
-            <li>날짜</li>
-            <li>시간</li>
-            <li>상태</li>
+          <ul v-for="warning in warning_list" v-bind:key="warning">
+            <li>{{ warning.detection_result}}</li>
+            <li>{{ warning.accuracy }}</li>
+            <li>{{ warning.decibel }}</li>
+            <li>{{ warning.building }}동</li>
+            <li>{{ warning.unit }}호</li>
+            <li>{{ warning.date }}</li>
+            <li>{{ warning.time }}</li>
+            <li>{{ warning.state }}</li>
           </ul>
         </div>
       </div>
@@ -79,8 +79,83 @@
   </template>
   
   <script>
+  import axios from "axios";
+
   export default {
-    name: 'HelloWorld'
+    name: 'HelloWorld',
+    data() {
+      return {
+        warning_list: {
+          id: "",
+          detection_result: "",
+          accuracy: "",
+          decibel: "",
+          building: "",
+          unit: "",
+          date: "",
+          time: "",
+          state: ""
+        },
+        caution_list: {
+          id: "",
+          detection_result: "",
+          accuracy: "",
+          decibel: "",
+          building: "",
+          unit: "",
+          date: "",
+          time: "",
+          state: ""
+        },
+        warning_length: null,
+        caution_length: null,
+        avg_db: "",
+        recent_db: ""
+      }
+    },
+    created() {
+      this.req_caution();
+      this.req_warning();
+      this.req_avg();
+    },
+    methods: {
+      async req_caution() {
+        try {
+          let caution = await axios.get('http://localhost:3000/ai/get_caution_list');
+          this.caution_list = caution.data;
+          this.caution_length = caution.data.length
+          console.log(caution.data);
+        } catch {
+          console.log("실패");
+        }
+      },
+      async req_warning() {
+        try {
+          let warning = await axios.get('http://localhost:3000/ai/get_warning_list');
+          this.warning_list = warning.data;
+          this.warning_length = warning.data.length
+          console.log(warning.data);
+        } catch {
+          console.log("실패");
+        }
+      },
+      async req_avg() {
+        try {
+          let avg = await axios.get('http://localhost:3000/ai/get_avg_db');
+          console.log(avg.data)
+          let sum = 0
+          for (let i = 0; i < avg.data.length; i++) {
+            sum += Number(avg.data[i]['decibel']);
+          }
+          this.avg_db = (sum / avg.data.length).toFixed();
+          this.recent_db = avg.data[0]['decibel'];
+        } catch {
+          console.log("실패");
+        }
+      }
+    }
+
+
   }
   </script>
   
@@ -91,7 +166,7 @@
   }
 
   h3 {
-    margin: 5% 0 0 10.5%;
+    margin: 5% 0 0 12%;
     font-size: 25px;
   }
   
@@ -153,19 +228,21 @@
   .cautionBox {
     width: 800px;
     height: 450px;
-    margin: 2.5% 0 0 10.5%;
+    margin: 2.5% 0 0 12%;
     background: #FFFFFF;
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.16);
     transition : all ease 1.5s;
+    overflow-y: auto;
   }
 
   .warningBox {
     width: 800px;
     height: 450px;
-    margin: 2.5% 0 0 10.5%;
+    margin: 2.5% 0 0 12%;
     background: #FFFFFF;
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.16);
     transition : all ease 1.5s;
+    overflow-y: auto;
   }
 
   .cautionBox ul,

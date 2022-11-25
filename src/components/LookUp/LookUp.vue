@@ -18,8 +18,7 @@
       </div>
     </div>
 
-    <div class="wrapBox" v-if="true">
-      {{ unit }}
+    <div class="wrapBox" v-if="unit_section">
       <h4>세대 조회</h4>
       <div class="selectBox">
         <div><a>{{current_building}}동</a></div>
@@ -28,19 +27,19 @@
 
       <div class="summaryBox">
         <dl>
-          <dt>10dB</dt>
+          <dt>{{ avg_db }}dB</dt>
           <dd>평균 소음</dd>
-          <dd>지난 1시간 동안</dd>
+          <dd>전체 기간 동안</dd>
         </dl>
         <dl>
-          <dt>10개</dt>
+          <dt>{{ caution_list }}</dt>
           <dd>주의</dd>
-          <dd>지난 1시간 동안</dd>
+          <dd>전체 기간 동안</dd>
         </dl>
         <dl>
-          <dt>3개</dt>
+          <dt>{{ warning_list }}</dt>
           <dd>경고</dd>
-          <dd>지난 1시간 동안</dd>
+          <dd>전체 기간 동안</dd>
         </dl>
       </div>
 
@@ -49,21 +48,17 @@
           <li>d_result</li>
           <li>accuracy</li>
           <li>decibel</li>
-          <li>building</li>
-          <li>unit</li>
           <li>date</li>
           <li>time</li>
           <li>status</li>
         </ul>
-        <ul>
-          <li>무엇</li>
-          <li>정확도?</li>
-          <li>데시벨</li>
-          <li>동</li>
-          <li>유닛(2/200)</li>
-          <li>날짜</li>
-          <li>시간</li>
-          <li>상태</li>
+        <ul v-for="unit in unit" v-bind:key="unit">
+          <li>{{unit.detection_result}}</li>
+          <li>{{unit.accuracy}}%</li>
+          <li>{{unit.decibel}}dB</li>
+          <li>{{unit.date}}</li>
+          <li>{{unit.time}}</li>
+          <li>{{unit.state}}</li>
         </ul>
       </div>
     </div>
@@ -91,12 +86,16 @@
           building: null,
           unit: null,
           date: null,
-          time: null
+          time: null,
+          state: null
         },
         unit_list_section: false,
         unit_section: false,
         current_building: null,
         current_unit: null,
+        caution_list: "",
+        warning_list: "",
+        avg_db: ""
       };
     },
     created() {
@@ -131,16 +130,51 @@
           console.log("실패");
         }
       },
+      async req_unit_caution() {
+        try {
+          console.log(this.current_unit);
+          let caution = await axios.get(`http://localhost:3000/ai/get_unit_caution/${this.current_building}/${this.current_unit}`);
+          console.log(caution.data, this.current_building, this.current_unit);
+          this.caution_list = caution.data.length
+        } catch {
+          console.log("실패");
+        }
+      },
+      async req_unit_warning() {
+        try {
+          let warning = await axios.get(`http://localhost:3000/ai/get_unit_warning/${this.current_building}/${this.current_unit}`);
+          console.log(warning.data, this.current_building, this.current_unit);
+          this.warning_list = warning.data.length
+        } catch {
+          console.log("실패");
+        }
+      },
+      async req_unit_db_avg() {
+        try {
+          let avg = await axios.get(`http://localhost:3000/ai/get_unit_avg_db/${this.current_building}/${this.current_unit}`);
+          let sum = 0
+          console.log(avg.data.length);
+          for (let i = 0; i < avg.data.length; i++) {
+           sum += Number(avg.data[i]['decibel']);
+          }
+          this.avg_db = (sum / avg.data.length).toFixed();
+        } catch {
+          console.log("실패");
+        }
+      },
       // 동 리스트 누르면 나오는 액션
       building_action(building_num) {
+        this.current_building = building_num;
         this.req_unit_list(building_num);
         this.unit_list_section = true;
-        this.current_building = building_num;
       },
       unit_action(unit_num) {
-        this.req_unit(unit_num);
-        this.unit_section = true;
         this.current_unit = unit_num;
+        this.req_unit(unit_num);
+        this.req_unit_caution();
+        this.req_unit_warning();
+        this.req_unit_db_avg();
+        this.unit_section = true;
       }
     }
   }
@@ -196,7 +230,7 @@
 
   .selectBox div {
     display: inline-block;
-    width: 80px;
+    width: 100px;
     font-size: 30px;
     font-weight: bold;
     padding: 20px 0 20px 0;
@@ -250,6 +284,7 @@
     background: #FFFFFF;
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.16);
     transition : all ease 1.5s;
+    overflow-y: auto;
   }
 
   .lookUpBox ul {
@@ -258,7 +293,7 @@
 
   .lookUpBox ul li {
     float: left;
-    width: 100px;
+    width: 133.3px;
     text-align: center;
     padding: 2% 0 0 0;
   }
