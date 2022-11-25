@@ -1,9 +1,9 @@
 <template>
   <nav>
-    <router-link to="/">메인화면</router-link>
     <router-link to="/live-view">실시간 현황</router-link>
     <router-link to="/lookup-view">소음 내역 조회</router-link>
     <router-link to="/details-view">세부 조회</router-link>
+    <router-link to="/">안내사항</router-link>
   </nav>
   <router-view/>
 </template>
@@ -45,7 +45,7 @@ html, body {
 }
 
 nav {
-  padding: 60px;
+  padding: 40px;
   background: #212121;
   text-align: center;
 }

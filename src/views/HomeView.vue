@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>메인화면</h1>
+    <h1>안내사항</h1>
   </div>
   <HelloWorld></HelloWorld>
 </template>
