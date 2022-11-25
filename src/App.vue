@@ -3,8 +3,10 @@
     <div>
       <p><span>송도에듀푸르지오</span><br>아파트</p>
     </div>
-    <router-link to="/live-view"><img src="./assets/Live/visibility.svg"></router-link>
-    <router-link to="/lookup-view"><img src="./assets/Live/search.svg"></router-link>
+    <div class="navIcon">
+      <router-link to="/live-view"><img src="./assets/Live/display_settings.svg"><span>실시간 현황</span></router-link>
+      <router-link to="/lookup-view"><img src="./assets/Live/search.svg"><span>소음 내역 조회</span></router-link>
+    </div>
     <!-- <router-link to="/">안내사항</router-link> -->
   </nav>
   <router-view/>
@@ -47,7 +49,8 @@ html, body {
 }
 
 nav {
-  padding: 2%;
+  height: 140px;
+  padding-top: 3%;
   background: #212121;
   text-align: center;
   position: relative;
@@ -77,6 +80,20 @@ nav a {
 
 nav img {
   width: 70px;
+}
+
+nav img:first-of-type {
+  margin-right: 0.3%;
+}
+
+.navIcon {
+  position: relative;
+}
+
+.navIcon span {
+  position: absolute;
+  margin-top: 5%;
+  margin-left: -5.4%;
 }
 
 </style>
