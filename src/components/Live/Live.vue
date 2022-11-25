@@ -17,9 +17,9 @@
         <dd>지난 15초 동안</dd>
       </dl>
       <dl>
-        <dt>10dB</dt>
-        <dd>현재 소음</dd>
-        <dd>지난 15초 동안</dd>
+        <dt>40dB</dt>
+        <dd>평균 소음</dd>
+        <dd>지난 1시간 동안</dd>
       </dl>
     </div>
   
@@ -27,72 +27,52 @@
       <div class="wrapBox">
         <h3>주의</h3>
         <div class="cautionBox">
-          <dl>
-            <dt>소음 종류</dt>
-            <dd>발 소리</dd>
-            <dd>자동차 소리</dd>
-            <dd>소음 종류</dd>
-          </dl>
-          <dl>
-            <dt>소음 크기</dt>
-            <dd>15dB</dd>
-            <dd>40dB</dd>
-            <dd>소음 크기</dd>
-          </dl>
-          <dl>
-            <dt>날짜</dt>
-            <dd>2022-11-23</dd>
-            <dd>2022-11-25</dd>
-            <dd>날짜</dd>
-          </dl>
-          <dl>
-            <dt>시간</dt>
-            <dd>13:20</dd>
-            <dd>13:40</dd>
-            <dd>시간</dd>
-          </dl>
-          <dl>
-            <dt>상태</dt>
-            <dd>허용</dd>
-            <dd>주의</dd>
-            <dd>상태</dd>
-          </dl>
+          <ul>
+            <li>d_result</li>
+            <li>accuracy</li>
+            <li>decibel</li>
+            <li>building</li>
+            <li>unit</li>
+            <li>date</li>
+            <li>time</li>
+            <li>status</li>
+          </ul>
+          <ul>
+            <li>무엇</li>
+            <li>정확도?</li>
+            <li>데시벨</li>
+            <li>동</li>
+            <li>유닛(2/200)</li>
+            <li>날짜</li>
+            <li>시간</li>
+            <li>상태</li>
+          </ul>
         </div>
       </div>
 
       <div class="wrapBox">
         <h3>경고</h3>
         <div class="warningBox">
-          <dl>
-            <dt>소음 종류</dt>
-            <dd>발 소리</dd>
-            <dd>자동차 소리</dd>
-            <dd>소음 종류</dd>
-          </dl>
-          <dl>
-            <dt>소음 크기</dt>
-            <dd>15dB</dd>
-            <dd>40dB</dd>
-            <dd>소음 크기</dd>
-          </dl>
-          <dl>
-            <dt>날짜</dt>
-            <dd>2022-11-23</dd>
-            <dd>2022-11-25</dd>
-            <dd>날짜</dd>
-          </dl>
-          <dl>
-            <dt>시간</dt>
-            <dd>13:20</dd>
-            <dd>13:40</dd>
-            <dd>시간</dd>
-          </dl>
-          <dl>
-            <dt>상태</dt>
-            <dd>허용</dd>
-            <dd>주의</dd>
-            <dd>상태</dd>
-          </dl>
+          <ul>
+            <li>d_result</li>
+            <li>accuracy</li>
+            <li>decibel</li>
+            <li>building</li>
+            <li>unit</li>
+            <li>date</li>
+            <li>time</li>
+            <li>status</li>
+          </ul>
+          <ul>
+            <li>무엇</li>
+            <li>정확도?</li>
+            <li>데시벨</li>
+            <li>동</li>
+            <li>유닛(2/200)</li>
+            <li>날짜</li>
+            <li>시간</li>
+            <li>상태</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -177,23 +157,24 @@
     background: #FFFFFF;
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.16);
   }
-  
-  .cautionBox dl,
-  .warningBox dl {
+
+  .cautionBox ul,
+  .warningBox ul {
+    width: 100%;
+    list-style: none;
+  }
+
+  .cautionBox ul li,
+  .warningBox ul li {
     float: left;
-    width: 140px;
+    width: 87.5px;
     text-align: center;
-    margin-top: 3%;
+    padding: 2% 0 0 0;
   }
   
-  .cautionBox dl dt,
-  .warningBox dl dt {
+  .cautionBox ul:first-of-type,
+  .warningBox ul:first-of-type {
     font-weight: bold;
-  }
-  
-  .cautionBox dl dd,
-  .warningBox dl dd {
-    margin-top: 6%;
   }
   
   </style>
