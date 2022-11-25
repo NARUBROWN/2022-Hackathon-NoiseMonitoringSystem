@@ -111,67 +111,69 @@
   }
 
   h3 {
-    margin: 2% 0 0 5%;
+    margin: 5% 0 0 12%;
     font-size: 25px;
   }
   
-.summaryBox {
-  width: 41.67%;
-  height: 160px;
-  margin: 1% 0 0 5%;
-  background: #FFFFFF;
-  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.16);
-}
-
-.summaryBox dl {
-  width: 25.00%;
-  height: 100px;
-  float: left;
-  text-align: left;
-  margin-top: 20px;
-}
-
-.summaryBox dl dt,
-.summaryBox dl dd {
-  margin-left: 25.00%;
-}
-
-.summaryBox dl dt {
-  margin-top: 20px;
-  margin-bottom: 12px;
-  font-size: 30px;
-  font-weight: bold;
-}
-
-.summaryBox dl dd:first-of-type {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 8px;
-}
-
-.summaryBox dl dd:nth-of-type(2) {
-  font-size: 15px;
-}
+  .summaryBox {
+    width: 800px;
+    height: 160px;
+    margin: 1% 0 0 5%;
+    background: #FFFFFF;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.16);
+  }
+  
+  .summaryBox dl {
+    width: 200px;
+    height: 100px;
+    float: left;
+    text-align: left;
+    margin-top: 20px;
+  }
+  
+  .summaryBox dl dt,
+  .summaryBox dl dd {
+    margin-left: 50px;
+  }
+  
+  .summaryBox dl dt {
+    margin-top: 20px;
+    margin-bottom: 12px;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  
+  .summaryBox dl dd:first-of-type {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .summaryBox dl dd:nth-of-type(2) {
+    font-size: 15px;
+  }
 
   .wrap {
     width: 100%;
-    height: 100vh;
+    height: 70vh;
   }
   .wrapBox {
+    float: left;
+    margin-right: 5%;
   }
 
   .cautionBox {
-    width: 41.67%;
+    width: 700px;
     height: 450px;
-    margin: 1% 0 0 5%;
+    margin: 2.5% 0 0 12%;
     background: #FFFFFF;
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.16);
   }
 
   .warningBox {
-    width: 41.67%;
+    width: 700px;
     height: 450px;
-    margin: 1% 0 0 5%;
+    margin: 2.5% 0 0 12%;
     background: #FFFFFF;
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.16);
   }
@@ -179,7 +181,7 @@
   .cautionBox dl,
   .warningBox dl {
     float: left;
-    width: 20%;
+    width: 140px;
     text-align: center;
     margin-top: 3%;
   }

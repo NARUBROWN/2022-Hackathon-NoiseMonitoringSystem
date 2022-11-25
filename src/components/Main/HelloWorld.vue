@@ -33,11 +33,11 @@ export default {
 <style scoped>
 h2 {
   margin: 2% 0 0 5%;
-  font-size: 25px;
+  font-size: 20px;
 }
 
 .summaryBox {
-  width: 41.67%;
+  width: 800px;
   height: 160px;
   margin: 1% 0 0 5%;
   background: #FFFFFF;
@@ -45,7 +45,7 @@ h2 {
 }
 
 .summaryBox dl {
-  width: 25.00%;
+  width: 200px;
   height: 100px;
   float: left;
   text-align: left;
@@ -54,7 +54,7 @@ h2 {
 
 .summaryBox dl dt,
 .summaryBox dl dd {
-  margin-left: 25.00%;
+  margin-left: 50px;
 }
 
 .summaryBox dl dt {
