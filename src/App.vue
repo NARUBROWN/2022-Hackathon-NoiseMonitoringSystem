@@ -2,8 +2,8 @@
   <nav>
     <router-link to="/live-view">실시간 현황</router-link>
     <router-link to="/lookup-view">소음 내역 조회</router-link>
-    <router-link to="/details-view">세부 조회</router-link>
     <router-link to="/">안내사항</router-link>
+    <router-link to="/details-view">세부 조회</router-link>
   </nav>
   <router-view/>
 </template>
