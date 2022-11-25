@@ -42,8 +42,8 @@
             <li>정확도?</li>
             <li>데시벨</li>
             <li>동</li>
-            <li>유닛(2/200)</li>
-            <li>날짜</li>
+            <li>유닛</li>
+            <li>2022-11-25</li>
             <li>시간</li>
             <li>상태</li>
           </ul>
@@ -91,7 +91,7 @@
   }
 
   h3 {
-    margin: 5% 0 0 12%;
+    margin: 5% 0 0 10.5%;
     font-size: 25px;
   }
   
@@ -147,22 +147,22 @@
   }
   .wrapBox {
     float: left;
-    margin-right: 5%;
+    margin-right: 2%;
   }
 
   .cautionBox {
-    width: 700px;
+    width: 800px;
     height: 450px;
-    margin: 2.5% 0 0 12%;
+    margin: 2.5% 0 0 10.5%;
     background: #FFFFFF;
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.16);
     transition : all ease 1.5s;
   }
 
   .warningBox {
-    width: 700px;
+    width: 800px;
     height: 450px;
-    margin: 2.5% 0 0 12%;
+    margin: 2.5% 0 0 10.5%;
     background: #FFFFFF;
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.16);
     transition : all ease 1.5s;
@@ -177,7 +177,7 @@
   .cautionBox ul li,
   .warningBox ul li {
     float: left;
-    width: 87.5px;
+    width: 100px;
     text-align: center;
     padding: 2% 0 0 0;
   }
